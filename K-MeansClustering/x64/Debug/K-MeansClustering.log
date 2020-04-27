@@ -1,0 +1,9 @@
+﻿  MyForm.cpp
+c:\users\atakb\desktop\k-meansclustering\k-meansclustering\myform.h(390): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\atakb\desktop\k-meansclustering\k-meansclustering\myform.h(420): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\atakb\desktop\k-meansclustering\k-meansclustering\myform.h(444): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\atakb\desktop\k-meansclustering\k-meansclustering\myform.h(454): warning C4996: '_sleep': This function or variable has been superceded by newer library or operating system functionality. Consider using Sleep instead. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdlib.h(1274): note: see declaration of '_sleep'
+c:\users\atakb\desktop\k-meansclustering\k-meansclustering\myform.h(500): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  MyForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  K-MeansClustering.vcxproj -> C:\Users\atakb\Desktop\K-MeansClustering\x64\Debug\K-MeansClustering.exe
