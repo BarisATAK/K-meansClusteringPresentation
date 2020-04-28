@@ -386,17 +386,47 @@ namespace KMeansClustering {
 		pictureBox1->Enabled = true;
 		randomPointsButton->Enabled = true;
 
-		if(centerPointArr == nullptr){
+		if (centerPointCount != 0) {
 			srand(time(NULL));
-			centerPointArr = new int*[centerPointCount];
-			for (int i = 0; i < centerPointCount; i++) {
-				centerPointArr[i] = new int[2];
-				centerPointArr[i][0] = (rand() % pictureBoxWidth);
-				centerPointArr[i][1] = (rand() % pictureBoxHeight);
-				//std::cout << i << "-->" << centerPointsVec[i][0] << " -- " << centerPointsVec[i][1] << std::endl;
+
+			if (centerPointArr == nullptr) {
+				centerPointArr = new int*[centerPointCount];
+				for (int i = 0; i < centerPointCount; i++) {
+					centerPointArr[i] = new int[2];
+					centerPointArr[i][0] = (rand() % pictureBoxWidth);
+					centerPointArr[i][1] = (rand() % pictureBoxHeight);
+					//std::cout << i << "-->" << centerPointsVec[i][0] << " -- " << centerPointsVec[i][1] << std::endl;
+					pictureBox1->Refresh();
+				}
 			}
+			else {
+				int* tempArr = new int[tempCpCount * 2];
+				for (int i = 0; i < tempCpCount; i++) {
+					tempArr[2 * i] = centerPointArr[i][0];
+					tempArr[2 * i + 1] = centerPointArr[i][1];
+				}
+				for (int i = 0; i < tempCpCount; i++)
+					delete[] centerPointArr[i];
+				delete[] centerPointArr;
+
+				centerPointArr = new int*[centerPointCount];
+				for (int i = 0; i < centerPointCount; i++) {
+					centerPointArr[i] = new int[2];
+					if (i < tempCpCount) {
+						centerPointArr[i][0] = tempArr[2 * i];
+						centerPointArr[i][1] = tempArr[2 * i + 1];
+					}
+					else {
+						centerPointArr[i][0] = (rand() % pictureBoxWidth);
+						centerPointArr[i][1] = (rand() % pictureBoxHeight);
+					}
+				}
+			}
+			tempCpCount = centerPointCount;
 		}
-		pictureBox1->Refresh();
+		else {
+			MessageBox::Show("Sıfırdan farklı değer giriniz!!!");
+		}
 	}//
 	private: System::Void pictureBox1_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 		Pen^ pen = gcnew Pen(Color::Black);
@@ -486,6 +516,7 @@ namespace KMeansClustering {
 			}
 			pictureBox1->Refresh();
 		} while (isCenterChange);
+		classList->Items->Add("\n<<<-------------------------------------->>>");
 		pointNumInClass.clear();
 		for (int i = 0; i < centerPointCount; i++)
 			delete[] totalCoord[i];
